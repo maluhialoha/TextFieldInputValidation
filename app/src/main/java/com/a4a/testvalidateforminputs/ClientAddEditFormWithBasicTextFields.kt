@@ -2,7 +2,9 @@ package com.a4a.testvalidateforminputs
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
@@ -18,15 +20,8 @@ fun ClientAddEditFormWithBasicTextFields(
     uiState: ClientState,
     onValueUpdated: (String?, FormElement) -> Unit,
 ) {
-
-    Column(
-        verticalArrangement = Arrangement.spacedBy(16.dp),
-        modifier = Modifier
-            .padding(top = 80.dp, start = 30.dp, end = 30.dp)
-            .fillMaxSize()
-    ) {
-        val textInput by remember { mutableStateOf("") }
-
+    Column() {
+        Text("Nom")
         ValidatingBasicTextField(
             onValueChange = { input ->
                 onValueUpdated(input.text, FormElement.CLIENT_OR_ISSUER_NAME)
@@ -36,6 +31,9 @@ fun ClientAddEditFormWithBasicTextFields(
                 .firstOrNull { it.first == FormElement.CLIENT_OR_ISSUER_NAME }
                 ?.second
         )
+
+        Spacer(modifier = Modifier.height(10.dp))
+        Text("Email")
         ValidatingBasicTextField(
             onValueChange = { input ->
                 onValueUpdated(input.text, FormElement.CLIENT_OR_ISSUER_EMAIL)
@@ -45,10 +43,15 @@ fun ClientAddEditFormWithBasicTextFields(
                 .firstOrNull { it.first == FormElement.CLIENT_OR_ISSUER_EMAIL }
                 ?.second
         )
+
+        Spacer(modifier = Modifier.height(30.dp))
         Button(onClick = {
             onValueUpdated(null, FormElement.SUBMIT_BUTTON)
         }) {
-            Text(text = "Valider")
+            Text(
+                modifier = Modifier.padding(0.dp),
+                text = "Valider"
+            )
         }
     }
 }

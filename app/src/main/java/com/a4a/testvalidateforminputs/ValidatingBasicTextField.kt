@@ -31,7 +31,7 @@ fun ValidatingBasicTextField(
     BasicTextField(
         modifier = Modifier
             .fillMaxWidth()
-            .background(Color.Gray)
+            .background(Color.LightGray)
             .padding(10.dp),
         value = text,
         onValueChange = {

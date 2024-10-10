@@ -1,7 +1,6 @@
 package com.a4a.testvalidateforminputs
 
 object Validator {
-
     fun validateName(input: String?): String? {
         return if(input.isNullOrEmpty())
             "Le nom est obligatoire"

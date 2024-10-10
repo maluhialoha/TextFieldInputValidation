@@ -18,21 +18,13 @@ fun ClientAddEditFormWithOutlinedTextFields(
     uiState: ClientState,
     onValueUpdated: (String?, FormElement) -> Unit,
 ) {
-
-    Column(
-        verticalArrangement = Arrangement.spacedBy(16.dp),
-        modifier = Modifier
-            .padding(top = 80.dp, start = 30.dp, end = 30.dp)
-            .fillMaxSize()
-    ) {
-        val textInput by remember { mutableStateOf("") }
-
+    Column {
         ValidatingOutlinedTextField(
             onValueChange = { input ->
                 onValueUpdated(input, FormElement.CLIENT_OR_ISSUER_NAME)
             },
             label = "Name",
-            isError = uiState.errors.any { it.first == FormElement.CLIENT_OR_ISSUER_NAME },
+            isError = uiState.errors.firstOrNull { it.first == FormElement.CLIENT_OR_ISSUER_NAME }?.second != null,
             errorMessage = uiState.errors
                 .firstOrNull { it.first == FormElement.CLIENT_OR_ISSUER_NAME }
                 ?.second
@@ -42,7 +34,7 @@ fun ClientAddEditFormWithOutlinedTextFields(
                 onValueUpdated(input, FormElement.CLIENT_OR_ISSUER_EMAIL)
             },
             label = "Email",
-            isError = uiState.errors.any { it.first == FormElement.CLIENT_OR_ISSUER_EMAIL },
+            isError = uiState.errors.firstOrNull { it.first == FormElement.CLIENT_OR_ISSUER_EMAIL }?.second != null,
             errorMessage = uiState.errors
                 .firstOrNull { it.first == FormElement.CLIENT_OR_ISSUER_EMAIL }
                 ?.second
